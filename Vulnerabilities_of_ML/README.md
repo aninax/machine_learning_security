@@ -82,6 +82,11 @@
  音声のAdversarial Examples。  
  元音声に（人間には知覚不能な）別音声を埋め込む手法。専用に訓練した音声認識システム（ASR）は埋め込み音声を認識できるが、他ASRは認識できない。ASRバックドアにも転用できそう。  
 
+ * [Fooling automated surveillance cameras: adversarial patches to attack person detection](https://arxiv.org/abs/1904.08653)  
+ 動画のAdversarial Examples。  
+ 人間にAdversarial Patchを貼り付ける事で、物体検出器（Personal Detectorを想定）から人間を隠す（検出できなくする）手法。  
+ 検証コード: [adversarial-yolo](https://gitlab.com/EAVISE/adversarial-yolo)  
+
 ### Decision boundary manipulation  
  訓練データを細工することで、MLモデルのDecision boundary（以下、決定境界）を操作する手法。  
  これにより、機械学習ベースのスパムフィルタや侵入検知等を回避することが可能となる。  
@@ -99,6 +104,9 @@
  線形回帰モデルを標的にしている。  
  訓練データに細工を加えることで、MLモデルの予測結果を操作する手法。  
 
+ * [Data Poisoning Attacks on Stochastic Bandits](https://arxiv.org/abs/1905.06494)  
+ TBA  
+
 ### Stealing model and privacy data
  MLモデルの入出力情報から、モデルの内部ロジックや（機微情報を含む可能性のある）訓練データを復元する手法。  
  モデルが復元されることで、（ユーザにクエリ数で課金してる）クラウドサービスに打撃を与える。  
@@ -112,6 +120,10 @@
 
  * [Machine Learning with Membership Privacy using Adversarial Regularization](https://arxiv.org/abs/1807.05852)  
  TBA.  
+
+ * [Deep Leakage from Gradients](https://arxiv.org/abs/1906.08935)  
+ 学習時に使用される勾配を基に学習データを復元する手法。  
+ マルチノードで分散学習するMLにおいては、MLモデル間で勾配を共有する事がある。そのようなケースを想定し、他MLから共有された勾配から学習データを復元する。  
 
 ### Trojan
  平時はノーマルなMLモデルとして動作し、特定の値を入力した際に攻撃者の意図した動作を行わせる手法。  
@@ -128,6 +140,36 @@
  平時はビデオアプリ等として動作し、（顔画像や音声等で）標的を認識するとランサムウエア化する。  
  ランサムウエアのペイロードを暗号化（ロック）しておき、DNNで標的を認識するとその復号鍵を生成して動作するため、既存のアンチマルウエアでは検知が難しいとの事。  
 
+ * [Programmable Neural Network Trojan for Pre-Trained Feature Extractor](https://arxiv.org/abs/1901.07766)  
+ TBA  
+ 
+ * [Trojaning Attack on Neural Networks](https://github.com/PurduePAML/TrojanNN/blob/master/trojan_nn.pdf)  
+ トリガとなるデータを既存モデルに入力することで、モデルに意図した出力を行わせる手法。  
+ 既存モデルの訓練データにアクセスする必要は無く、既存モデルをリバースエンジニアして作成した**Torojan Trigger**と**再訓練用の学習データ**を組み合わせることで、トリガデータを効率良く作成可能。攻撃の成功率も非常に高い。  
+ 検証コード：[PurduePAML/TrojanNN](https://github.com/PurduePAML/TrojanNN)  
+ 
+ * [PoTrojan: powerful neural-level trojan designs in deep learning models](https://arxiv.org/abs/1802.03043)  
+ ネットワークの隠れ層に**Triggerノード**と**Payloadノード**を挿入し、モデルに意図した出力を行わせる手法。  
+ 殆どの入力データをモデルは正しく分類する事が可能だが、ある特定のデータに対してのみ（攻撃者が意図した）誤った出力をするため、ステルス性が高い。  
+
+ * [Backdooring Convolutional Neural Networks via Targeted Weight Perturbations](https://arxiv.org/abs/1812.03128)  
+ CNNにTrojanを仕込む手法。  
+
+ * [STRIP: A Defence Against Trojan Attacks on Deep Neural Networks](https://arxiv.org/abs/1902.06531)  
+ TBA  
+ 
+ * [Detecting Backdoor Attacks on Deep Neural Networks by Activation Clustering](https://arxiv.org/abs/1811.03728)  
+ TBA  
+ 
+ * [TrojDRL: Trojan Attacks on Deep Reinforcement Learning Agents](https://arxiv.org/abs/1903.06638)  
+ TBA  
+
+ * [A backdoor attack against LSTM-based text classification systems](https://arxiv.org/abs/1905.12457)  
+ LSTMベースの文書分類器にTrojanを仕込む方法。  
+
+ * [Neural Cleanse: Identifying and Mitigating Backdoor Attacks in Neural Networks](https://www.computer.org/csdl/proceedings-article/sp/2019/666000a530/19skfH8dcqc)  
+ スライド：[Neural Cleanse](https://www.ieee-security.org/TC/SP2019/SP19-Slides-pdfs/Bolun_Wang_-MAC_-_08-Bolun_Wang-Neural_Clense_Identifying_and_Mitigating_Backdoor_Attacks_against_Neural_Networks_(1).pdf)  
+
 ### Unsafety framework and library
  機械学習フレームワークやライブラリに存在する脆弱性を利用する手法。  
 
@@ -143,6 +185,7 @@
  * [StuxNNet:Practical Live Memory Attacks on Machine Learning Systems](https://aivillage.org/material/cn18-norwitz/slides.pdf)  
  実行中のNeural Network（以下、NN）の判断を誤らせる手法。  
  NN実行中のメモリに展開されたNNの重みやバイアスを直接操作し、NNに誤判断を引き起こさせる。  
+ 検証コード：[https://github.com/bryankim96/stux-DNN](bryankim96/stux-DNN)  
 
  * [Practical Fault Attack on Deep Neural Networks](https://arxiv.org/abs/1806.05859)  
  組み込み機器にビルドインされたDNNの判断を誤らせる手法。  
@@ -168,6 +211,13 @@
  機械学習版のMetasploitを目指したツール。  
  更新は止まっているようだが、コンセプト等を参考にしたい。  
  検証コード: [cchio/deep-pwning](https://github.com/cchio/deep-pwning)  
+
+ * [DeepSec](https://www.computer.org/csdl/proceedings-article/sp/2019/666000a398/19skfzVqzGE)  
+ Adversarial Examplesへの耐性をチェックする手法。  
+
+ * [Comprehensive Privacy Analysis of Deep Learning](https://www.computer.org/csdl/proceedings-article/sp/2019/666000b021/19skg8ZskUM)  
+ モデルからの情報漏えいの可能性をチェックする手法。  
+ スライド: [Comprehensive Privacy Analysis of Deep Learning](https://www.ieee-security.org/TC/SP2019/SP19-Slides-pdfs/Milad_Nasr_-_08-Milad_Nasr-Comprehensive_Privacy_Analysis_of_Deep_Learning_(1).pdf)  
 
 ## Other contents
  * [ADVERSARIAL MACHINE LEARNING TUTORIAL](https://aaai18adversarial.github.io/)  
